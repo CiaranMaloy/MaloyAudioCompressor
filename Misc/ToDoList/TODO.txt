@@ -1,6 +1,6 @@
 2022/12/07
 
-1. Make flow diagram of signal path
+// 1. Make flow diagram of signal path
 2. Make Mock up GUI 
 3. Expand on how each component in the flow diagram is going to work
 4. Update this information into the README.md file
