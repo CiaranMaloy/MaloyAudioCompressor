@@ -1,0 +1,23 @@
+A list of the objects that will be used to make up the compressor
+
+======
+1. Amplifier 
+
+An amplifier object will apply volume and gain parameters to the signal. 
+This is not treated as a gain parameter since any amount of modeling could be included within this stage. 
+======
+======
+2. Level Detector (Signal Envelope Follower)
+
+An object which calculates the current signal level. 
+This is expanded on with the addition of attack and release parameters. 
+This can also be expanded on with the addition of peak, rms and underdamping to emulate a VU meter. 
+======
+======
+3. Gain Computer
+
+Gain Computer object calculates the amount of gain required to apply to the output signal given the output from the level detector. 
+there are a number of curves and smoothing techniques to apply when deciding the gain to apply. 
+This computer is genberic enough to be expanded on to create a compressor, limiter or expanded (upwards or downwards), 
+depending on the way the gain is computed. 
+======

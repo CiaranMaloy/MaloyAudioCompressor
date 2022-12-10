@@ -2,5 +2,10 @@
 
 // 1. Make flow diagram of signal path
 // 2. Make Mock up GUI 
-3. Expand on how each component in the flow diagram is going to work
+3. Expand on how each component in the flow diagram is going to work as an object
+    a. a compressor is not one object but a number of objects that work together, 
+    these being: 
+        i. Gain object (used multiple times throughout, as static gain and as a digitally controlled amplifier)
+        ii. a Level detector, which computes the signal envelope using attack and release parameters
+        iii. a Gain computer which works out how much gain should be applied to each sample in the current buffer given it's envelope
 4. Update this information into the README.md file
