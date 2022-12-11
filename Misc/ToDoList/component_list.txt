@@ -21,3 +21,24 @@ there are a number of curves and smoothing techniques to apply when deciding the
 This computer is genberic enough to be expanded on to create a compressor, limiter or expanded (upwards or downwards), 
 depending on the way the gain is computed. 
 ======
+
+====== Generic Component Layout ====== 
+1: .prepare(spec) function
+accepts juce::DSP::processSpec object 
+or some other parameter object that describes the current
+working environment of the plugin. 
+processSpec just contains the maximum block size, samplerate and number
+of channels the plugin will be dealing with. 
+
+2: .process() function 
+can really take in anything, but generally adds the effect to
+the current buffer reference - in the case of this being a side chain object, 
+this can add some processing to the side chain, i.e RMS level calculation. 
+
+3: .updateParams() function
+updates parameters, and accepts anything that's needed. 
+Generally is a vodi function that calls from the audioProcessorValueTreeState
+
+4: .update() function
+updates anything that isn't a parameter or is internal. 
+====== 
