@@ -16,6 +16,10 @@
         <FILE id="ZFaZQz" name="LevelDetector.h" compile="0" resource="0" file="Source/Compressor/LevelDetector.h"/>
         <FILE id="Ncgpix" name="WaveShaping.cpp" compile="1" resource="0" file="Source/Compressor/WaveShaping.cpp"/>
         <FILE id="C4mUM9" name="WaveShaping.h" compile="0" resource="0" file="Source/Compressor/WaveShaping.h"/>
+        <FILE id="clWf1i" name="ExampleEffectFile.cpp" compile="1" resource="0"
+              file="Source/Compressor/ExampleEffectFile.cpp"/>
+        <FILE id="DVD2ql" name="ExampleEffectFile.h" compile="0" resource="0"
+              file="Source/Compressor/ExampleEffectFile.h"/>
       </GROUP>
       <FILE id="rfvEPT" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>

@@ -9,3 +9,12 @@
 */
 
 #pragma once
+#include <JuceHeader.h>
+
+class GainComputer
+{
+public:
+    
+private:
+    
+};
