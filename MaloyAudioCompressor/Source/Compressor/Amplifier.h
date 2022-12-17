@@ -19,6 +19,7 @@ public:
     Amplifier(); // constructor
     void prepare(juce::dsp::ProcessSpec); // input spec
     void process(juce::AudioBuffer<float>&); // process data within the audio buffer
+    //void process(juce::AudioBuffer<float>&, juce::AudioBuffer<float>); // override for sidechain
     void updateParams(); // update paramiters (no input)
     void updateParams(float, float); // update parameters with gain and volume
     void update(); // update
