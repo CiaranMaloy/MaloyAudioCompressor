@@ -5,6 +5,18 @@
               jucerFormatVersion="1">
   <MAINGROUP id="jVJRWg" name="MaloyAudioCompressor">
     <GROUP id="{6304B40F-BEA9-3F4F-3382-4FEC30E8CEB0}" name="Source">
+      <GROUP id="{11280E20-93B4-6C49-F395-FB13392C8542}" name="Compressor">
+        <FILE id="GJmSmg" name="Amplifier.cpp" compile="1" resource="0" file="Source/Compressor/Amplifier.cpp"/>
+        <FILE id="lAh9Gc" name="Amplifier.h" compile="0" resource="0" file="Source/Compressor/Amplifier.h"/>
+        <FILE id="CjYzT0" name="GainComputer.cpp" compile="1" resource="0"
+              file="Source/Compressor/GainComputer.cpp"/>
+        <FILE id="Ol1O11" name="GainComputer.h" compile="0" resource="0" file="Source/Compressor/GainComputer.h"/>
+        <FILE id="jWia56" name="LevelDetector.cpp" compile="1" resource="0"
+              file="Source/Compressor/LevelDetector.cpp"/>
+        <FILE id="ZFaZQz" name="LevelDetector.h" compile="0" resource="0" file="Source/Compressor/LevelDetector.h"/>
+        <FILE id="Ncgpix" name="WaveShaping.cpp" compile="1" resource="0" file="Source/Compressor/WaveShaping.cpp"/>
+        <FILE id="C4mUM9" name="WaveShaping.h" compile="0" resource="0" file="Source/Compressor/WaveShaping.h"/>
+      </GROUP>
       <FILE id="rfvEPT" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="d7kHtj" name="PluginProcessor.h" compile="0" resource="0"
@@ -34,6 +46,7 @@
         <MODULEPATH id="juce_graphics" path="../../../../../../../../Applications/JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../../../../../../../Applications/JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../../../../../../../../Applications/JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../../../../../../../../../Applications/JUCE/modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
   </EXPORTFORMATS>
@@ -47,6 +60,7 @@
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
