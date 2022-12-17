@@ -21,6 +21,9 @@ public:
     void updateParams(); // update paramiters (no input)
     void updateParams(float); // update parameters with gain and volume
     void update(); // update
+    
+    // getters and setters
+    // there are none so far
 private:
     struct parameters // parameters that can be used
     {
