@@ -22,6 +22,7 @@ public:
     void update();
     
     // getters and setters
+    juce::AudioBuffer<float> getSideChain(); // maybe this should be a pointer?
     
 private:
     struct parameters // parameters that can be used
