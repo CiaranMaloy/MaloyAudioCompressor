@@ -19,9 +19,33 @@ MaloyAudioCompressorAudioProcessor::MaloyAudioCompressorAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       ), Amp()
+                       ), apvts(*this, nullptr, "PROCESSOR", createAPVTSParameterLayout())
 #endif
 {
+}
+// Parameter layout
+juce::AudioProcessorValueTreeState::ParameterLayout MaloyAudioCompressorAudioProcessor::createAPVTSParameterLayout()
+{
+//    // setout plugin
+//    float input_level = 1.0f;
+//    float input_gain = 1.0f;
+//    float threshold = 0.2;
+//    float ratio = 5.0f;
+//    float knee = 0.1;
+    
+    std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+    const int versionHint = 1;
+    
+    // Floats
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{"INPUT LEVEL", versionHint}, "Input Level", 0.0f, 2.0f, 1.0f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{"INPUT GAIN", versionHint}, "Input Gain", 0.0f, 3.0f, 0.0f));
+    
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{"THRESHOLD", versionHint}, "Threshold", 0.0f, 1.0f, 0.1f));
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{"RATIO", versionHint}, "Ratio", 0.0f, 10.0f, 1.0f));
+    
+    params.push_back(std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{"KNEE", versionHint}, "Knee", 0.0f, 1.0f, 0.1f));
+    
+    return {params.begin(), params.end()};
 }
 
 MaloyAudioCompressorAudioProcessor::~MaloyAudioCompressorAudioProcessor()
@@ -100,6 +124,8 @@ void MaloyAudioCompressorAudioProcessor::prepareToPlay (double sampleRate, int s
     // Create objects
     // Amplifier
     Amp.prepare(mSpec);
+    LevelDetect.prepare(mSpec);
+    GainComp.prepare(mSpec);
     
 }
 
@@ -146,11 +172,26 @@ void MaloyAudioCompressorAudioProcessor::processBlock (juce::AudioBuffer<float>&
         buffer.clear (i, 0, buffer.getNumSamples());
 
     // setout plugin
+    float level = 1.0f;
+    float input_gain = 1.0f;
+    float threshold = 0.2;
+    float ratio = 5.0f;
+    float knee = 0.1;
+    
     // update params
-    Amp.updateParams(1.0f, 0.0f);
+    Amp.updateParams(level, input_gain);
+    LevelDetect.updateParams();
+    GainComp.updateParams(threshold, ratio, knee);
     
     // 1. Input gain
     Amp.process(buffer);
+    
+    // 2. Detect signal level
+    LevelDetect.process(buffer);
+    GainComp.process(LevelDetect.getSideChain());
+    
+    // 3. apply gain from gaincomp
+    Amp.process(buffer, GainComp.getSideChain());
     
 }
 

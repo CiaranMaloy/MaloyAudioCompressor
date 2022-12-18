@@ -63,9 +63,17 @@ private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MaloyAudioCompressorAudioProcessor)
     
+    // 0. audio processor value tree state
+    juce::AudioProcessorValueTreeState apvts;
+    juce::AudioProcessorValueTreeState::ParameterLayout createAPVTSParameterLayout();
+    
     // 1. processor specification
     juce::dsp::ProcessSpec mSpec;
     
     // 2. amplifier
     Amplifier Amp;
+    
+    // 3. level detector and gain computer
+    LevelDetector LevelDetect;
+    GainComputer GainComp;
 };

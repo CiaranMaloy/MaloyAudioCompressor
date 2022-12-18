@@ -16,7 +16,7 @@ class GainComputer
 public:
     GainComputer(); // constructor
     void prepare(juce::dsp::ProcessSpec); // input spec
-    void process(juce::AudioBuffer<float>&); // process data within the audio buffer
+    void process(juce::AudioBuffer<float>); // process data within the audio buffer
     void updateParams(); // update paramiters (no input)
     void updateParams(float, float, float); // threshold, ratio, knee
     void update(); // update

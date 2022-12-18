@@ -21,7 +21,7 @@ void GainComputer::prepare(juce::dsp::ProcessSpec specification)
     sideChain.setSize(mSpec.numChannels, mSpec.maximumBlockSize);
 }
 
-void GainComputer::process(juce::AudioBuffer<float>& bufferFromLevelDetector)
+void GainComputer::process(juce::AudioBuffer<float> bufferFromLevelDetector)
 {
     // volume
     for (int channel = 0; channel < mSpec.numChannels; channel++)

@@ -19,10 +19,12 @@ All three objects have been made in their basic form, so next update is to make 
 
 2022/12/18
 
-1. Use and utilise all objects in a working plugin
-    a. Amplifier
-    b. LevelDetector
-    c. GainComputer
-    d. Amplifier (as digitally controlled amplifier)
+// 1. Use and utilise all objects in a working plugin
+    // a. Amplifier
+    // b. LevelDetector
+    // c. GainComputer
+    // d. Amplifier (as digitally controlled amplifier)
 
-2. Edit settings so effect is obvious
+// 2. Edit settings so effect is obvious
+
+3. link all current working parameters to a simple gui
