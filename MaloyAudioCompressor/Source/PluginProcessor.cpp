@@ -147,7 +147,7 @@ void MaloyAudioCompressorAudioProcessor::processBlock (juce::AudioBuffer<float>&
 
     // setout plugin
     // update params
-    Amp.updateParams(1.0f, 1.0f);
+    Amp.updateParams(1.0f, 0.0f);
     
     // 1. Input gain
     Amp.process(buffer);

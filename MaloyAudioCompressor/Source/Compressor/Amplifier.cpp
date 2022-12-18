@@ -23,7 +23,10 @@ void Amplifier::prepare(juce::dsp::ProcessSpec specification)
 void Amplifier::process(juce::AudioBuffer<float>& buffer)
 {
     // gain
-    WaveShaping::process(WaveShaping::EffectType::amp, buffer, buffer.getNumChannels(), mParams.gain[1]);
+    if (mParams.gain[1] > 0.0f) // temporary
+    {
+        WaveShaping::process(WaveShaping::EffectType::amp, buffer, buffer.getNumChannels(), mParams.gain[1]);
+    }
     
     // volunme
     for (int channel = 0; channel < mSpec.numChannels; channel++)
