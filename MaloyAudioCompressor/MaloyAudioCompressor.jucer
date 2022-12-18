@@ -5,6 +5,12 @@
               jucerFormatVersion="1">
   <MAINGROUP id="jVJRWg" name="MaloyAudioCompressor">
     <GROUP id="{6304B40F-BEA9-3F4F-3382-4FEC30E8CEB0}" name="Source">
+      <GROUP id="{90307500-D8C1-E719-8C58-3FB657286FEA}" name="GraphicComponents">
+        <FILE id="bVXm7h" name="ButtonsAndDials.cpp" compile="1" resource="0"
+              file="Source/GraphicComponents/ButtonsAndDials.cpp"/>
+        <FILE id="wwsABA" name="ButtonsAndDials.h" compile="0" resource="0"
+              file="Source/GraphicComponents/ButtonsAndDials.h"/>
+      </GROUP>
       <GROUP id="{11280E20-93B4-6C49-F395-FB13392C8542}" name="Compressor">
         <FILE id="GJmSmg" name="Amplifier.cpp" compile="1" resource="0" file="Source/Compressor/Amplifier.cpp"/>
         <FILE id="lAh9Gc" name="Amplifier.h" compile="0" resource="0" file="Source/Compressor/Amplifier.h"/>
