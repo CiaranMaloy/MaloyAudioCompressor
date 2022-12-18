@@ -14,4 +14,6 @@ TODO: 4. Update this information into the README.md file
 
 // 1. Amplifier object is made
 // 2. Make LevelDetector object in some basic form
-3. Make a GainComputer object
+// 3. Make a GainComputer object
+All three objects have been made in their basic form, so next update is to make work in some audio effect
+
