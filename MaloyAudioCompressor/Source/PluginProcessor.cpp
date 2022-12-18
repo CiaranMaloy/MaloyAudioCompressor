@@ -19,7 +19,7 @@ MaloyAudioCompressorAudioProcessor::MaloyAudioCompressorAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ), Amp()
 #endif
 {
 }
@@ -93,8 +93,14 @@ void MaloyAudioCompressorAudioProcessor::changeProgramName (int index, const juc
 //==============================================================================
 void MaloyAudioCompressorAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    mSpec.maximumBlockSize = samplesPerBlock;
+    mSpec.sampleRate = sampleRate;
+    mSpec.numChannels = 2;
+    
+    // Create objects
+    // Amplifier
+    Amp.prepare(mSpec);
+    
 }
 
 void MaloyAudioCompressorAudioProcessor::releaseResources()
@@ -131,6 +137,7 @@ bool MaloyAudioCompressorAudioProcessor::isBusesLayoutSupported (const BusesLayo
 
 void MaloyAudioCompressorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+    // Standard stuff
     juce::ScopedNoDenormals noDenormals;
     auto totalNumInputChannels  = getTotalNumInputChannels();
     auto totalNumOutputChannels = getTotalNumOutputChannels();
@@ -138,12 +145,13 @@ void MaloyAudioCompressorAudioProcessor::processBlock (juce::AudioBuffer<float>&
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
-    for (int channel = 0; channel < totalNumInputChannels; ++channel)
-    {
-        auto* channelData = buffer.getWritePointer (channel);
-
-        // ..do something to the data...
-    }
+    // setout plugin
+    // update params
+    Amp.updateParams(1.0f, 1.0f);
+    
+    // 1. Input gain
+    Amp.process(buffer);
+    
 }
 
 //==============================================================================

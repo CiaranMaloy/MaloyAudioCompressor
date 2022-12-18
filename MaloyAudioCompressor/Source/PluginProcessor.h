@@ -9,6 +9,9 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "Compressor/LevelDetector.h"
+#include "Compressor/GainComputer.h"
+#include "Compressor/Amplifier.h"
 
 //==============================================================================
 /**
@@ -59,4 +62,10 @@ public:
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MaloyAudioCompressorAudioProcessor)
+    
+    // 1. processor specification
+    juce::dsp::ProcessSpec mSpec;
+    
+    // 2. amplifier
+    Amplifier Amp;
 };

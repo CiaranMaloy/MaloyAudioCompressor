@@ -17,3 +17,12 @@ TODO: 4. Update this information into the README.md file
 // 3. Make a GainComputer object
 All three objects have been made in their basic form, so next update is to make work in some audio effect
 
+2022/12/18
+
+1. Use and utilise all objects in a working plugin
+    a. Amplifier
+    b. LevelDetector
+    c. GainComputer
+    d. Amplifier (as digitally controlled amplifier)
+
+2. Edit settings so effect is obvious
