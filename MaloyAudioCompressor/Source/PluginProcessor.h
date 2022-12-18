@@ -59,6 +59,8 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    // ====== APVTS =====
+    juce::AudioProcessorValueTreeState& getAPVTS() {return apvts;}
 private:
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (MaloyAudioCompressorAudioProcessor)
@@ -66,6 +68,7 @@ private:
     // 0. audio processor value tree state
     juce::AudioProcessorValueTreeState apvts;
     juce::AudioProcessorValueTreeState::ParameterLayout createAPVTSParameterLayout();
+    void updateEffectParameters();
     
     // 1. processor specification
     juce::dsp::ProcessSpec mSpec;

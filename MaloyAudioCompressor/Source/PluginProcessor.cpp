@@ -172,19 +172,10 @@ void MaloyAudioCompressorAudioProcessor::processBlock (juce::AudioBuffer<float>&
         buffer.clear (i, 0, buffer.getNumSamples());
 
     // setout plugin
-    float level = 1.0f;
-    float input_gain = 1.0f;
-    float threshold = 0.2;
-    float ratio = 5.0f;
-    float knee = 0.1;
-    
-    // update params
-    Amp.updateParams(level, input_gain);
-    LevelDetect.updateParams();
-    GainComp.updateParams(threshold, ratio, knee);
+    updateEffectParameters();
     
     // 1. Input gain
-    Amp.process(buffer);
+    //Amp.process(buffer);
     
     // 2. Detect signal level
     LevelDetect.process(buffer);
@@ -192,7 +183,20 @@ void MaloyAudioCompressorAudioProcessor::processBlock (juce::AudioBuffer<float>&
     
     // 3. apply gain from gaincomp
     Amp.process(buffer, GainComp.getSideChain());
-    
+}
+
+void MaloyAudioCompressorAudioProcessor::updateEffectParameters()
+{
+    Amp.updateParams(
+                     apvts.getRawParameterValue("INPUT LEVEL")->load(),
+                     apvts.getRawParameterValue("INPUT GAIN")->load()
+                     );
+    LevelDetect.updateParams();
+    GainComp.updateParams(
+                          apvts.getRawParameterValue("THRESHOLD")->load(),
+                          apvts.getRawParameterValue("RATIO")->load(),
+                          apvts.getRawParameterValue("KNEE")->load()
+                          );
 }
 
 //==============================================================================

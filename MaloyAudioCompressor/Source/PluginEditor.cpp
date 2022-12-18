@@ -11,11 +11,11 @@
 
 //==============================================================================
 MaloyAudioCompressorAudioProcessorEditor::MaloyAudioCompressorAudioProcessorEditor (MaloyAudioCompressorAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+: AudioProcessorEditor (&p), ButtonsAndDialsObj(p), audioProcessor(p)
 {
-    // Make sure that before the constructor has finished, you've set the
-    // editor's size to whatever you need it to be.
-    setSize (400, 300);
+    addAndMakeVisible(ButtonsAndDialsObj);
+    //addAndMakeVisible(VisualiserWindowObj);
+    setSize (800, 250);
 }
 
 MaloyAudioCompressorAudioProcessorEditor::~MaloyAudioCompressorAudioProcessorEditor()
@@ -25,16 +25,14 @@ MaloyAudioCompressorAudioProcessorEditor::~MaloyAudioCompressorAudioProcessorEdi
 //==============================================================================
 void MaloyAudioCompressorAudioProcessorEditor::paint (juce::Graphics& g)
 {
-    // (Our component is opaque, so we must completely fill the background with a solid colour)
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
-
-    g.setColour (juce::Colours::white);
-    g.setFont (15.0f);
-    g.drawFittedText ("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
+    g.fillAll (juce::Colours::green);
+    g.setColour(juce::Colours::white);
 }
 
 void MaloyAudioCompressorAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    const float bnd_x_pos_relative = 0;
+    const float bnd_y_pos_relative = 0.4;
+    
+    ButtonsAndDialsObj.setBoundsRelative(bnd_x_pos_relative, bnd_y_pos_relative, 1.0f-bnd_x_pos_relative, 1.0f-bnd_y_pos_relative);
 }
