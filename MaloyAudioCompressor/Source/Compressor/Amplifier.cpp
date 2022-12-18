@@ -32,6 +32,22 @@ void Amplifier::process(juce::AudioBuffer<float>& buffer)
     }
 }
 
+// override for side chain input
+void Amplifier::process(juce::AudioBuffer<float>& buffer, juce::AudioBuffer<float> sideChain)
+{
+    for (int channel = 0; channel < mSpec.numChannels; channel++)
+    {
+        float* bufferWrite = buffer.getWritePointer(channel);
+        const float* bufferRead = buffer.getReadPointer(channel);
+        const float* sideChainRead = buffer.getReadPointer(channel);
+        
+        for (int sample = 0; sample < mSpec.maximumBlockSize; sample++)
+        {
+            bufferWrite[sample] = bufferRead[sample] * sideChainRead[sample];
+        }
+    }
+}
+
 void Amplifier::update()
 {
     mParams.level[0] = mParams.level[1];
