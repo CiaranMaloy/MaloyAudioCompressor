@@ -14,9 +14,6 @@
 //==============================================================================
 ViewVoltageTransfer::ViewVoltageTransfer()
 {
-    // In your constructor, you should add any child components, and
-    // initialise any special settings that your component needs.
-
 }
 
 ViewVoltageTransfer::~ViewVoltageTransfer()
@@ -25,27 +22,85 @@ ViewVoltageTransfer::~ViewVoltageTransfer()
 
 void ViewVoltageTransfer::paint (juce::Graphics& g)
 {
-    /* This demo code just fills the component's background and
-       draws some placeholder text to get you started.
-
-       You should replace everything in this method with your own
-       drawing code..
-    */
-
-    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));   // clear the background
-
-    g.setColour (juce::Colours::grey);
-    g.drawRect (getLocalBounds(), 1);   // draw an outline around the component
-
-    g.setColour (juce::Colours::white);
-    g.setFont (14.0f);
-    g.drawText ("ViewVoltageTransfer", getLocalBounds(),
-                juce::Justification::centred, true);   // draw some placeholder text
+    g.fillAll(juce::Colours::black);   // clear the background
+    g.setColour(juce::Colours::black);
+    g.fillRect(outerBounds);
+    g.setColour(juce::Colours::black);
+    g.fillRect(innerBounds);
+    
+    //auto path_to_paint = generateVoltageTransferPath(innerBounds);
+    auto path_to_paint = generateVoltageTransferPath(innerBounds);
+    
+    g.setColour(mSetColour);
+    g.strokePath(path_to_paint, juce::PathStrokeType(1.f));
+    
+    // paint cross
+    juce::Path crossVerticalPath;
+    crossVerticalPath.startNewSubPath(innerBounds.getX()+1 + innerBounds.getWidth()/2, innerBounds.getY());
+    crossVerticalPath.lineTo(innerBounds.getX()+1 + innerBounds.getWidth()/2, innerBounds.getY() + innerBounds.getHeight());
+    g.strokePath(crossVerticalPath, juce::PathStrokeType(1.f));
+    
+    juce::Path crossHorisontalPath;
+    crossHorisontalPath.startNewSubPath(innerBounds.getX(), innerBounds.getY()+innerBounds.getHeight()/2);
+    crossHorisontalPath.lineTo(innerBounds.getX() + innerBounds.getWidth(), innerBounds.getY() + innerBounds.getHeight()/2);
+    g.strokePath(crossHorisontalPath, juce::PathStrokeType(1.f));
 }
 
 void ViewVoltageTransfer::resized()
 {
-    // This method is where you should set the bounds of any child
-    // components that your component contains..
+    outerBounds.setBounds(0, 0, getWidth(), getHeight());
+    
+    // Place visualiser window inside
+    auto reduceRatioX = 0.1;
+    auto reduceRatioY = 0.1;
+    auto reduceX = getWidth()*reduceRatioX;
+    auto reduceY = getHeight()*reduceRatioY;
+    
+    innerBounds.setBounds(reduceX, reduceY, getWidth()-2.0*reduceX, getHeight()-2.0*reduceY);
+}
 
+//juce::Path ViewVoltageTransfer::generateVoltageTransferPath(juce::Rectangle<float> Rect)
+//{
+//        juce::Path displayPath;
+//        juce::Random r;
+//
+//        displayPath.startNewSubPath(Rect.getX(), Rect.getY() + Rect.getHeight() * r.nextFloat());
+//
+//        // draw a random line
+//        for (auto x = Rect.getX() + 1; x < Rect.getRight(); x += 2)
+//        {
+//            displayPath.lineTo(x, Rect.getY() + Rect.getHeight() * r.nextFloat());
+//        }
+//
+//    return displayPath;
+//}
+
+juce::Path ViewVoltageTransfer::generateVoltageTransferPath(juce::Rectangle<float> Rect)
+{
+    int N = 10*(Rect.getRight() - Rect.getX());
+    GainComputer GainComp;
+    juce::Path displayPath;
+    juce::AudioBuffer<float> displayBuffer = GainComp.getVoltageTransferFunction(N);
+    int CHANNEL = displayBuffer.getNumChannels() - 1;
+    DBG(CHANNEL);
+    
+    const int width = Rect.getRight() - Rect.getX();
+    const float OFFSET = 0.5;
+    const int DOWNSAMPLE = N/width;
+    
+    const float* channelData = displayBuffer.getReadPointer(CHANNEL);
+    
+    // draw a random line
+    float scaling = 0.5;
+    float maxValue = displayBuffer.getMagnitude(CHANNEL, 0, displayBuffer.getNumSamples());
+    
+    displayPath.startNewSubPath(Rect.getX(), Rect.getY() + Rect.getHeight() * (-scaling*channelData[0]/maxValue + OFFSET));
+    for (int x = Rect.getX()+1; x < Rect.getRight()+1; x += 1)
+    {
+        int x_s = x-Rect.getX()-1;
+        //DBG(channelData[x*DOWNSAMPLE]);
+        displayPath.lineTo(x, Rect.getY() + Rect.getHeight() * (-scaling*channelData[x_s*DOWNSAMPLE]/maxValue + OFFSET));
+    }
+    
+    return displayPath;
 }

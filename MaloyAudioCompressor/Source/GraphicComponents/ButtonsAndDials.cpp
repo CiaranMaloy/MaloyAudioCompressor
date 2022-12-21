@@ -30,6 +30,9 @@ ButtonsAndDials::ButtonsAndDials(MaloyAudioCompressorAudioProcessor& p) : audioP
     mThresholdAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.getAPVTS(), "THRESHOLD", mThresholdSlider);
     mRatioAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.getAPVTS(), "RATIO", mRatioSlider);
     mKneeAttachment = std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor.getAPVTS(), "KNEE", mKneeSlider);
+    
+    // transfer object
+    addTransferObjWithLabel(&mCompTransferObj, &mCompTransferObjLabel, "Compressor");
 }
 
 ButtonsAndDials::~ButtonsAndDials()
@@ -56,6 +59,11 @@ void ButtonsAndDials::paint (juce::Graphics& g)
     mRatioSlider.setColour(juce::Slider::ColourIds::thumbColourId, CompressorColour);
     mRatioSlider.setColour(juce::Slider::ColourIds::textBoxTextColourId, CompressorColour);
     mRatioLabel.setColour(juce::Label::textColourId, CompressorColour);
+    
+    auto CompTransferObjColour = juce::Colours::white;
+    mCompTransferObj.setLineColour(CompTransferObjColour);
+    mCompTransferObj.repaint();
+    mCompTransferObj.setColour(juce::Label::textColourId, CompTransferObjColour);
 }
 
 void ButtonsAndDials::resized()
@@ -77,6 +85,9 @@ void ButtonsAndDials::resized()
     mThresholdSlider.setBoundsRelative(startX+n*dialWidth, startY, dialWidth, dialHeight);n+=1;
     mRatioSlider.setBoundsRelative(startX+n*dialWidth, startY, dialWidth, dialHeight);n+=1;
     mKneeSlider.setBoundsRelative(startX+n*dialWidth, startY, dialWidth, dialHeight);n+=1;
+    
+    // Graphics
+    mCompTransferObj.setBoundsRelative(startX+n*dialWidth, startY, dialWidth, dialHeight);n+=1;
 }
 
 void ButtonsAndDials::addSliderWithLabel(juce::Slider::SliderStyle style, juce::Slider* sliderObj, juce::Label* labelObj, std::string label_text,  WetDryChain selection, double centre_point)
@@ -122,3 +133,13 @@ void ButtonsAndDials::addSliderWithLabel(juce::Slider::SliderStyle style, juce::
 //    addAndMakeVisible(labelObj);
 //}
 
+void ButtonsAndDials::addTransferObjWithLabel(ViewVoltageTransfer* trans, juce::Label* labelObj, std::string label_text)
+{
+    addAndMakeVisible(trans);
+    // Add label
+    labelObj->setFont(15.f);
+    labelObj->setText(label_text, juce::NotificationType::dontSendNotification);
+    labelObj->setJustificationType(juce::Justification::horizontallyCentred);
+    labelObj->attachToComponent(trans, false);
+    addAndMakeVisible(labelObj);
+}

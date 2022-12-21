@@ -30,6 +30,9 @@ All three objects have been made in their basic form, so next update is to make 
 
 2022/12/21
 
+0. Fix debug console not connecting to ableton
+    a. this because ableton is 'Hardened' 
+    [https://developer.apple.com/documentation/security/hardened_runtime?preferredLanguage=occ]
 1. Set up graphical tracking of the compressor output.
 2. double check this by testing each component (learn to set up some tests??)
 3. sign off each checked and tested component

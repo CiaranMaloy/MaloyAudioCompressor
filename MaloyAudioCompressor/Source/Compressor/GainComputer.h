@@ -23,6 +23,8 @@ public:
     
     // getters and setters
     juce::AudioBuffer<float> getSideChain();
+    
+    juce::AudioBuffer<float> getVoltageTransferFunction(int N);
 private:
     struct parameters // parameters that can be used
     {
@@ -35,4 +37,7 @@ private:
     juce::AudioBuffer<float> sideChain;
     
     float computeGain(float input, float threshold, float ratio, float knee); // input, threshold, ratio, knee
+    
+    // Transfer function output
+    juce::AudioBuffer<float> mDisplayBuffer;
 };

@@ -12,7 +12,9 @@
 
 GainComputer::GainComputer()
 {
-    // empty constructor
+    mSpec.maximumBlockSize = 512;
+    mSpec.numChannels = 1;
+    mSpec.sampleRate = 44100;
 }
 
 void GainComputer::prepare(juce::dsp::ProcessSpec specification)
@@ -90,4 +92,22 @@ float GainComputer::computeGain(float input, float threshold, float ratio, float
 }
 
 // output gain curve
-
+juce::AudioBuffer<float> GainComputer::getVoltageTransferFunction(int N)
+{
+    int CHANNEL = 0;
+    int NCHANNELS = mSpec.numChannels;
+    mDisplayBuffer.setSize(NCHANNELS, N);
+    
+    // === writer -1 to 1 in the buffer
+    for (int sample = 0; sample < mDisplayBuffer.getNumSamples(); sample++)
+    {
+        float input = 1.0*(static_cast<float>(sample))/(static_cast<float>(N)); // = n/N for n to N
+        mDisplayBuffer.setSample(CHANNEL, sample, input);
+    }
+    // ======
+    // ====== Put the audio throught the effect
+    process(mDisplayBuffer);
+    // ======
+    
+    return mDisplayBuffer;
+}
