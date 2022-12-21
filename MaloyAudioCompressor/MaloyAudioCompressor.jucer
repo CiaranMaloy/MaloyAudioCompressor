@@ -6,6 +6,10 @@
   <MAINGROUP id="jVJRWg" name="MaloyAudioCompressor">
     <GROUP id="{6304B40F-BEA9-3F4F-3382-4FEC30E8CEB0}" name="Source">
       <GROUP id="{90307500-D8C1-E719-8C58-3FB657286FEA}" name="GraphicComponents">
+        <FILE id="Szwipt" name="ViewVoltageTransfer.cpp" compile="1" resource="0"
+              file="Source/GraphicComponents/ViewVoltageTransfer.cpp"/>
+        <FILE id="STCEKT" name="ViewVoltageTransfer.h" compile="0" resource="0"
+              file="Source/GraphicComponents/ViewVoltageTransfer.h"/>
         <FILE id="bVXm7h" name="ButtonsAndDials.cpp" compile="1" resource="0"
               file="Source/GraphicComponents/ButtonsAndDials.cpp"/>
         <FILE id="wwsABA" name="ButtonsAndDials.h" compile="0" resource="0"

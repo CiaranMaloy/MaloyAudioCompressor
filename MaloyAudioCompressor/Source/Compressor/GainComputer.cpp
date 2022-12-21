@@ -88,3 +88,6 @@ float GainComputer::computeGain(float input, float threshold, float ratio, float
         return 0;
     }
 }
+
+// output gain curve
+

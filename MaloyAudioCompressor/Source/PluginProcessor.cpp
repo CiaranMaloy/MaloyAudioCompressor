@@ -161,7 +161,7 @@ bool MaloyAudioCompressorAudioProcessor::isBusesLayoutSupported (const BusesLayo
 }
 #endif
 
-void MaloyAudioCompressorAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void MaloyAudioCompressorAudioProcessor::processBlock(juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     // Standard stuff
     juce::ScopedNoDenormals noDenormals;
@@ -175,7 +175,7 @@ void MaloyAudioCompressorAudioProcessor::processBlock (juce::AudioBuffer<float>&
     updateEffectParameters();
     
     // 1. Input gain
-    //Amp.process(buffer);
+    Amp.process(buffer);
     
     // 2. Detect signal level
     LevelDetect.process(buffer);

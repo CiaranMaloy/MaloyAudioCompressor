@@ -34,5 +34,5 @@ private:
     juce::dsp::ProcessSpec mSpec; // global private
     juce::AudioBuffer<float> sideChain;
     
-    float computeGain(float, float, float, float); // input, threshold, ratio, knee
+    float computeGain(float input, float threshold, float ratio, float knee); // input, threshold, ratio, knee
 };

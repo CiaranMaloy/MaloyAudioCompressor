@@ -26,5 +26,10 @@ All three objects have been made in their basic form, so next update is to make 
     // d. Amplifier (as digitally controlled amplifier)
 
 // 2. Edit settings so effect is obvious
-
 // 3. link all current working parameters to a simple gui
+
+2022/12/21
+
+1. Set up graphical tracking of the compressor output.
+2. double check this by testing each component (learn to set up some tests??)
+3. sign off each checked and tested component
