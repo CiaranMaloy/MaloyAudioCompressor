@@ -36,3 +36,8 @@ All three objects have been made in their basic form, so next update is to make 
 1. Set up graphical tracking of the compressor output.
 2. double check this by testing each component (learn to set up some tests??)
 3. sign off each checked and tested component
+
+2023/01/16 
+
+0. Quick Fix: Get this to work in a sandbox style mode 
+1. Long Fix: Figure out how to 'unharden' ableton live?
